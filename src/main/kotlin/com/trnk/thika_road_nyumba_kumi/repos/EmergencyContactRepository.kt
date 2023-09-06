@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository
 import java.util.*
 @Repository
 interface EmergencyContactRepository :JpaRepository<EmergencyContactEntity,Long>{
-    @Query(nativeQuery = true, value = "SELECT * FROM emergency_contact where lastname like %:name%")
+    @Query(nativeQuery = true, value = "SELECT * FROM emergency_contact WHERE lastname LIKE CONCAT('%', :name, '%')")
     fun findByLastname(name: String,pageable: Pageable): Page<EmergencyContactEntity>
     fun findByRelations(relation:String): Optional<EmergencyContactEntity>
     //fun findByIdNumber(idNumber:String): Optional<EmergencyContactEntity>

@@ -11,8 +11,8 @@ data class MechanicDto (
     val username:String,
     val phoneNumber:String,
     val locationName:String,
-    val latitude:String,
-    val longitude:String,
+    val latitude:Double,
+    val longitude:Double,
     val updatedAt: Date
 ){
     companion object{

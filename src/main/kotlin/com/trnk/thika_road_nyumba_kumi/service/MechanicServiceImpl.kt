@@ -5,6 +5,9 @@ import com.trnk.thika_road_nyumba_kumi.exceptions.ControllerExceptionHandler
 import com.trnk.thika_road_nyumba_kumi.model.MechanicModel
 import com.trnk.thika_road_nyumba_kumi.model.UpdateMechanic
 import com.trnk.thika_road_nyumba_kumi.repos.MechanicRepo
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.PageRequest
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.util.*
@@ -46,6 +49,12 @@ class MechanicServiceImpl(private val mecRepo:MechanicRepo) : MechanicService {
 
     override fun getMechanicByName(username: String): Optional<MechanicEntity> {
         return mecRepo.findByUsername(username)
+    }
+
+    override fun searchMechanicLocationsWithinDistance(targetLat: Double, targetLon: Double, distance:Int,pageRequest: PageRequest): List<MechanicEntity> {
+        val limit:Int = pageRequest.pageSize
+        val offset:Int = limit * pageRequest.pageNumber
+        return mecRepo.findLocationsWithinDistance(targetLat, targetLon, distance, limit, offset )
     }
 
     override fun getAllMechanics(): List<MechanicEntity> {

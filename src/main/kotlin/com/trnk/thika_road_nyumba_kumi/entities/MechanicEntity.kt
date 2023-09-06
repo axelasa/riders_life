@@ -16,14 +16,15 @@ import java.util.Date
     val username:String,
     var phoneNumber:String,
     var locationName:String,
-    var latitude:String,
-    var longitude:String,
+    var latitude:Double,
+    var longitude:Double,
+    var location:Double,
     var updatedAt:Date
 ){
     companion object{
         private val now = Date()
         fun createNewMechanic(mechanicModel: MechanicModel):MechanicEntity{
-            val newMec = MechanicEntity(null, now,mechanicModel.firstname,mechanicModel.lastname,mechanicModel.username,mechanicModel.phoneNumber,mechanicModel.locationName,mechanicModel.latitude,mechanicModel.longitude,now)
+            val newMec = MechanicEntity(null, now,mechanicModel.firstname,mechanicModel.lastname,mechanicModel.username,mechanicModel.phoneNumber,mechanicModel.locationName,mechanicModel.latitude,mechanicModel.longitude, mechanicModel.location,now)
             return newMec
         }
     }

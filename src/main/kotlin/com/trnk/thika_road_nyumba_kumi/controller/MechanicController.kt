@@ -6,6 +6,8 @@ import com.trnk.thika_road_nyumba_kumi.model.ApiResponse
 import com.trnk.thika_road_nyumba_kumi.model.MechanicModel
 import com.trnk.thika_road_nyumba_kumi.model.UpdateMechanic
 import jakarta.validation.Valid
+import org.springframework.data.domain.PageRequest
+import org.springframework.data.domain.Sort
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -34,6 +36,23 @@ class MechanicController {
             return ResponseEntity(response,HttpStatus.NOT_FOUND)
         }
         val result = ApiResponse(HttpStatus.OK.value(),"Mechanic $existingMechanic Found",MechanicDto.fromMechanicEntity(existingMechanic.get()))
+        return ResponseEntity(result,HttpStatus.OK)
+    }
+    @GetMapping("lat_lng")
+    fun searchMechanicByLatLng(@RequestParam ( "latitude",required = true)latitude:Double,
+                               @RequestParam ( "longitude",required = true)longitude:Double,
+                               @RequestParam ( "distance",required = true)distance:Int,
+                               @RequestParam (value = "page", defaultValue = "0", required = false)page:Int,
+                              @RequestParam (value = "page_size", defaultValue = "10", required = false)pageSize:Int
+                               ):ResponseEntity<Any>{
+
+        val response = ApiResponse(HttpStatus.NOT_FOUND.value(),"No Mechanics Around You",null)
+        val searchMechanic = mechanicService.searchMechanicLocationsWithinDistance(latitude,longitude,distance, pageRequest = PageRequest.of(page,pageSize) )
+        if(searchMechanic.isEmpty()){
+            return ResponseEntity(response,HttpStatus.NOT_FOUND)
+        }
+        val mechanicData = searchMechanic.map { MechanicDto.fromMechanicEntity(it) }.toList()
+        val result =ApiResponse(HttpStatus.OK.value(),"Mechanic Found",mechanicData)
         return ResponseEntity(result,HttpStatus.OK)
     }
     @GetMapping("mechanics")
