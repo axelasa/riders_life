@@ -7,10 +7,13 @@ import com.trnk.thika_road_nyumba_kumi.repos.UserRepo
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import java.util.*
 
 @Service
+@Transactional
 class UserServiceImpl(private val userRepo: UserRepo) : UserService {
+        
     override fun createUser(user: UserModel): UserEntity {
         val existingUser = getUserByIdNumber(user.idNumber)
         if (existingUser.isPresent) throw ControllerExceptionHandler.conflicts("This user Already Exists")
@@ -33,4 +36,5 @@ class UserServiceImpl(private val userRepo: UserRepo) : UserService {
     override fun getAllUsers(): List<UserEntity> {
        return userRepo.findAll()
     }
+
 }

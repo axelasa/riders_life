@@ -10,12 +10,12 @@ data class EmergencyContactDto (
     val lastname:String,
     val phoneNumber:String,
     val relations:String,
+    val updatedAt: Date,
     val idNumber:String,
-    val updatedAt: Date
 ){
     companion object{
         fun fromEmergencyContactEntity(e:EmergencyContactEntity):EmergencyContactDto{
-            return EmergencyContactDto(e.id!!,e.createdAt,e.firstname,e.lastname,e.phoneNumber,e.relations,e.user.idNumber,e.updatedAt)
+            return EmergencyContactDto(e.id!!,e.createdAt,e.firstname,e.lastname,e.phoneNumber,e.relations,e.updatedAt,e.user.idNumber)
         }
     }
 }

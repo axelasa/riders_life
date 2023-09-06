@@ -10,5 +10,7 @@ interface ProfileService {
     fun getProfileByBloodGroup(bloodGroup:String):Optional<ProfileEntity>
     fun getProfileByNumberPlate(numberPlate:String):Optional<ProfileEntity>
     fun getProfileByRoadLocation(roadLocation:String):Optional<ProfileEntity>
+    fun getProfileByPhoneNUmber(phoneNumber:String):Optional<ProfileEntity>
     fun updateProfile(updateProfile: UpdateProfile):ProfileEntity
+    fun getAllProfiles():List<ProfileEntity>
 }

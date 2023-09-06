@@ -10,7 +10,7 @@ import java.util.*
 
 @Repository
 interface UserRepo:JpaRepository<UserEntity,Long> {
-    @Query(nativeQuery = true, value = "SELECT * FROM user_data where id_number like %:idNumber% ")
+    @Query(nativeQuery = true, value = "SELECT * FROM user_data WHERE id_number LIKE %:idNumber%")
     fun findByIdNumberLike(idNumber:String,pageable: Pageable): Page<UserEntity>
     fun findByIdNumber(idNumber: String):Optional<UserEntity>
     override fun findById(id:Long): Optional<UserEntity>

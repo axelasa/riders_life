@@ -1,31 +1,30 @@
 package com.trnk.thika_road_nyumba_kumi.entities
 
 import com.trnk.thika_road_nyumba_kumi.model.MechanicModel
-import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.Id
-import jakarta.persistence.Table
+import jakarta.persistence.*
 import java.util.Date
 
 @Entity
 @Table(name = "mechanics")
-data class MechanicEntity (
+ class MechanicEntity (
     @Id
-    @GeneratedValue
-    val id:Long,
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    val id:Long?,
     val createdAt:Date,
-    val firstname:String,
-    val lastname:String,
-    val phoneNumber:String,
-    val locationName:String,
-    val latitude:String,
-    val longitude:String,
-    val updatedAt:Date
+    var firstname:String,
+    var lastname:String,
+    val username:String,
+    var phoneNumber:String,
+    var locationName:String,
+    var latitude:String,
+    var longitude:String,
+    var updatedAt:Date
 ){
     companion object{
         private val now = Date()
-        fun createNewMechanic(mechanicModel: MechanicModel){
-
+        fun createNewMechanic(mechanicModel: MechanicModel):MechanicEntity{
+            val newMec = MechanicEntity(null, now,mechanicModel.firstname,mechanicModel.lastname,mechanicModel.username,mechanicModel.phoneNumber,mechanicModel.locationName,mechanicModel.latitude,mechanicModel.longitude,now)
+            return newMec
         }
     }
 }

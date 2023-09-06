@@ -2,23 +2,26 @@ package com.trnk.thika_road_nyumba_kumi.entities
 
 import com.trnk.thika_road_nyumba_kumi.model.ProfileModel
 import jakarta.persistence.*
+import lombok.ToString
 import java.util.Date
 
 @Entity
 @Table(name = "profile")
-data class ProfileEntity(
+ class ProfileEntity(
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     val id:Long?,
     val createdAt:Date,
     val bloodGroup:String,
     var insurance:String,
     var insuranceId:String,
-    val numberPlate:String,
+    var numberPlate:String,
     @Column(nullable = true)
     var roadLocation:String,
     var phoneNumber: String,
-    @OneToOne(mappedBy = "profile")
+    @JoinColumn(name = "user_profile_id")
+    @OneToOne(cascade = [CascadeType.DETACH])
+    @ToString.Exclude
     val user: UserEntity,
     var updatedAt:Date
 ){
