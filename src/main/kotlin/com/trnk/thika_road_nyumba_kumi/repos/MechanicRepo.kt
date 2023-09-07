@@ -11,15 +11,6 @@ import java.util.*
 @Repository
 interface MechanicRepo:JpaRepository<MechanicEntity,Long> {
 fun findByUsername(username: String): Optional<MechanicEntity>
-    @Query(
-        value = "SELECT * FROM mechanics WHERE latitude = :latitude AND longitude = :longitude",
-        nativeQuery = true,
-
-    )
-
-fun findByLongitudeAndLatitude(longitude: Double, latitude: Double,pageable: Pageable): Page<MechanicEntity>
-
-
 
     @Query(
         value = """
