@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
@@ -25,7 +26,7 @@ fun createEmergencyContact(@RequestBody emergencyContactModel:EmergencyContactMo
     return ResponseEntity(result,HttpStatus.OK)
 }
 
- @PostMapping("update_emergency_contact")
+ @PutMapping("update_emergency_contact")
  fun updateEmergencyContact(@RequestBody emergencyContactUpdate: EmergencyContactUpdate):ResponseEntity<Any>{
     val newContact = emergencyContactService.updateEmergencyContacts(emergencyContactUpdate)
      val result = ApiResponse(HttpStatus.OK.value(),"Contact ${newContact.firstname} ${newContact.lastname} has been created successfully",EmergencyContactDto.fromEmergencyContactEntity(newContact))

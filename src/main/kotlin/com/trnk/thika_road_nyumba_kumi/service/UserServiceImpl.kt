@@ -4,20 +4,24 @@ import com.trnk.thika_road_nyumba_kumi.entities.UserEntity
 import com.trnk.thika_road_nyumba_kumi.exceptions.ControllerExceptionHandler
 import com.trnk.thika_road_nyumba_kumi.model.UserModel
 import com.trnk.thika_road_nyumba_kumi.repos.UserRepo
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.util.*
 
 @Service
 @Transactional
-class UserServiceImpl(private val userRepo: UserRepo) : UserService {
-        
+class UserServiceImpl(private val userRepo: UserRepo,private val bCryptPasswordEncoder:BCryptPasswordEncoder = BCryptPasswordEncoder()) : UserService {
+
+
     override fun createUser(user: UserModel): UserEntity {
         val existingUser = getUserByIdNumber(user.idNumber)
         if (existingUser.isPresent) throw ControllerExceptionHandler.conflicts("This user Already Exists")
         val newUser = UserEntity.createNewUser(user)
+        bCryptPasswordEncoder.encode(newUser.password)
         return userRepo.save(newUser)
     }
 
