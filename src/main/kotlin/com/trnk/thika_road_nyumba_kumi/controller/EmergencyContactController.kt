@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/emergency_contact")
+@RequestMapping("/trnk")
 class EmergencyContactController {
 @PostMapping("create_emergency_contact")
 fun createEmergencyContact(@RequestBody emergencyContactModel:EmergencyContactModel): ResponseEntity<Any> {

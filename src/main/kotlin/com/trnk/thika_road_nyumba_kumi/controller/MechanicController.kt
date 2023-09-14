@@ -13,7 +13,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("mechanic")
+@RequestMapping("/mechanic")
 class MechanicController {
     @PostMapping("new_mechanic")
     fun createNewMechanic(@Valid @RequestBody mechanic:MechanicModel):ResponseEntity<Any>{

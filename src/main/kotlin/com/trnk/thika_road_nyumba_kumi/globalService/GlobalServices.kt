@@ -12,6 +12,7 @@ class GlobalServices {
         lateinit var profileService:ProfileService
         lateinit var emergencyContactService:EmergencyContactService
         lateinit var mechanicService: MechanicService
+        lateinit var merchantService: MerchantService
     }
     @Autowired
     fun setUserService(userService: UserService){
@@ -32,5 +33,9 @@ class GlobalServices {
     @Autowired
     fun setMechanicService(mechanicService: MechanicService){
         GlobalServices.mechanicService = mechanicService
+    }
+    @Autowired
+    fun setMerchantService(merchantService: MerchantService){
+        GlobalServices.merchantService = merchantService
     }
 }

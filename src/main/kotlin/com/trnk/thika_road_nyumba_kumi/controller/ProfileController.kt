@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/profile")
+@RequestMapping("/trnk")
 class ProfileController {
     @PostMapping("create_profile")
     fun createAProfile(@RequestBody profile:ProfileModel):ResponseEntity<Any>{

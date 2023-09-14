@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("trnk")
+@RequestMapping("/trnk")
 class LoginController {
     @PostMapping("sign_in")
     fun logInUser(@RequestBody loginModel: LoginModel):ResponseEntity<Any>{
