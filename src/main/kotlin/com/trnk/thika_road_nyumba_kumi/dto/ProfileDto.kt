@@ -13,7 +13,6 @@ data class ProfileDto(
     val idNumber:String,
     val roadLocation:String,
     val phoneNumber: String,
-    //val user: UserDto,
     val updatedAt: Date
 ){
     companion object{
