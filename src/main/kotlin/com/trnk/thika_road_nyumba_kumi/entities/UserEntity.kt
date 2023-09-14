@@ -6,7 +6,7 @@ import java.util.Date
 
 @Entity
 @Table(name = "user_data")
-data class UserEntity(
+ class UserEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     val id:Long?,
@@ -15,10 +15,10 @@ data class UserEntity(
     val lastname:String,
     val idNumber:String,
     val password:String,
-    @OneToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
-    @JoinColumn(name = "user_profile_id")
-    val profile:ProfileEntity?,
-    @OneToMany(fetch = FetchType.EAGER, cascade = [CascadeType.ALL], mappedBy = "user")
+    @JoinColumn(name = "profile_id")
+    @OneToOne(fetch = FetchType.EAGER, cascade = [CascadeType.ALL], orphanRemoval = true)
+    var profile:ProfileEntity?,
+    @OneToMany(mappedBy = "user",fetch = FetchType.EAGER, cascade = [CascadeType.ALL], orphanRemoval = true )
     val emergencyContact:MutableSet<EmergencyContactEntity> = mutableSetOf(),
     val updatedAt:Date,
 
@@ -26,13 +26,9 @@ data class UserEntity(
 ){
     companion object{
         private val now = Date()
-        fun createNewUser(userModel: UserModel):UserEntity{
-            val newUser = UserEntity(null, createdAt = now, firstname = userModel.firstname, lastname = userModel.lastname, idNumber = userModel.idNumber, password = userModel.password, profile = null, emergencyContact = mutableSetOf(), updatedAt = now)
+        fun createNewUser(user: UserModel):UserEntity{
+            val newUser = UserEntity(null, createdAt = now, firstname = user.firstname, lastname = user.lastname, idNumber = user.idNumber, password = user.password, updatedAt = now, emergencyContact = mutableSetOf(),profile = null,)
             return newUser
         }
-
-//        fun createNewUser(userModel: UserModel): UserEntity {
-//
-//        }
     }
 }

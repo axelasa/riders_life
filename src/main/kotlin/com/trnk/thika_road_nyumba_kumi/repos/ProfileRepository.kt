@@ -9,6 +9,7 @@ import java.util.Optional
 interface ProfileRepository :JpaRepository<ProfileEntity,Long>{
     fun findByBloodGroup(bloodGroup:String):Optional<ProfileEntity>
     fun findByNumberPlate(numberPlate:String):Optional<ProfileEntity>
+    fun findByPhoneNumber(phoneNumber: String):Optional<ProfileEntity>
     fun findByRoadLocation(roadLocation:String):Optional<ProfileEntity>
 
 }

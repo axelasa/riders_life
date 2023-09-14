@@ -9,10 +9,12 @@ import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/user")
+//@Transactional
 class UserController {
     @PostMapping("new_user")
     fun createUser(@Valid @RequestBody user:UserModel):ResponseEntity<Any>{
@@ -34,6 +36,7 @@ class UserController {
         val result = ApiResponse(HttpStatus.OK.value(),"User Found",data)
         return ResponseEntity(result,HttpStatus.OK)
     }
+
     @GetMapping("users")
     fun getAllUsers():List<UserDto> = userService.getAllUsers().stream().map {
         UserDto.fromUserEntity(it)
