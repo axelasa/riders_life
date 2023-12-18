@@ -1,7 +1,7 @@
 package com.trnk.thika_road_nyumba_kumi.entities
 
 import com.trnk.thika_road_nyumba_kumi.model.ProfileModel
-import jakarta.persistence.*
+import javax.persistence.*
 import lombok.ToString
 import java.util.Date
 

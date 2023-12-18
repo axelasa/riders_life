@@ -2,10 +2,10 @@ package com.trnk.thika_road_nyumba_kumi.specification
 
 import com.trnk.thika_road_nyumba_kumi.entities.EmergencyContactEntity
 import com.trnk.thika_road_nyumba_kumi.entities.UserEntity
-import jakarta.persistence.criteria.CriteriaBuilder
-import jakarta.persistence.criteria.CriteriaQuery
-import jakarta.persistence.criteria.Predicate
-import jakarta.persistence.criteria.Root
+import javax.persistence.criteria.CriteriaBuilder
+import javax.persistence.criteria.CriteriaQuery
+import javax.persistence.criteria.Predicate
+import javax.persistence.criteria.Root
 import org.springframework.data.jpa.domain.Specification
 
 class EmergencyContactSpecification(private val idNumber:String,private val contactId:Long):Specification<EmergencyContactEntity> {
@@ -31,7 +31,7 @@ class EmergencyContactSpecification(private val idNumber:String,private val cont
         if (contactId == null) return
         p.expressions.add(cb.equal(r.get<Long>("id"),contactId))
     }
-    private fun addIdNumber(idNumber: String){
+    private fun addIdNumber(idNumber: String?){
         if (idNumber == null) return
         p.expressions.add(cb.equal(cb.upper(r.get<UserEntity>("user_data").get("idNumber")),idNumber))
     }

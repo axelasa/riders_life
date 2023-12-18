@@ -5,7 +5,7 @@ import com.trnk.thika_road_nyumba_kumi.globalService.GlobalServices.Companion.me
 import com.trnk.thika_road_nyumba_kumi.model.ApiResponse
 import com.trnk.thika_road_nyumba_kumi.model.MerchantModel
 import com.trnk.thika_road_nyumba_kumi.model.UpdateMerchant
-import jakarta.validation.Valid
+import javax.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*

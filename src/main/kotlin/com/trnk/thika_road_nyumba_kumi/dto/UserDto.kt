@@ -17,7 +17,7 @@ data class UserDto(
     companion object{
         fun fromUserEntity(u:UserEntity):UserDto{
             val data = u.emergencyContact.map { EmergencyContactDto.fromEmergencyContactEntity(it) }.toSet()
-            return UserDto(u.id!!,u.firstname,u.lastname,u.idNumber,u.password,u.createdAt,u.updatedAt, if (u.profile != null) ProfileDto.fromProfileEntity(u.profile!!) else null,data)
+            return UserDto(u.id!!,u.firstname,u.lastname,u.idNumber,u.userPassword,u.createdAt,u.updatedAt, if (u.profile != null) ProfileDto.fromProfileEntity(u.profile!!) else null,data)
         }
     }
 }

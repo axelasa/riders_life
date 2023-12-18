@@ -1,6 +1,6 @@
 package com.trnk.thika_road_nyumba_kumi.model
 
-import jakarta.validation.constraints.NotEmpty
+import javax.validation.constraints.NotEmpty
 
 data class UpdateMerchant(
     @field:NotEmpty(message = "Firstname Cannot be Empty") val firstname:String?,

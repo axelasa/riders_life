@@ -3,24 +3,27 @@ package com.trnk.thika_road_nyumba_kumi.exceptions
 import com.trnk.thika_road_nyumba_kumi.model.ApiResponse
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
-import org.springframework.http.HttpStatusCode
+//import org.springframework.http.HttpStatusCode
 import org.springframework.http.ResponseEntity
+import org.springframework.security.core.AuthenticationException
 import org.springframework.web.bind.MethodArgumentNotValidException
+import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
 import org.springframework.web.client.HttpServerErrorException
+import org.springframework.web.client.HttpStatusCodeException
 import org.springframework.web.context.request.WebRequest
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler
-import java.lang.Exception
 
 @RestControllerAdvice
-class ControllerExceptionHandler :ResponseEntityExceptionHandler() {
+@ControllerAdvice
+class ControllerExceptionHandler : ResponseEntityExceptionHandler() {
     override fun handleMethodArgumentNotValid(
         ex: MethodArgumentNotValidException,
         headers: HttpHeaders,
-        status: HttpStatusCode,
+        status: HttpStatus,
         request: WebRequest
-    ): ResponseEntity<Any>? {
+    ): ResponseEntity<Any> {
         val error = ex.bindingResult.allErrors
         val description = if (error.isEmpty())ex.message else error[0].defaultMessage
         return ResponseEntity(ApiResponse(status.value(),description!!,null),status)
@@ -30,9 +33,9 @@ class ControllerExceptionHandler :ResponseEntityExceptionHandler() {
         ex: Exception,
         body: Any?,
         headers: HttpHeaders,
-        status: HttpStatusCode,
+        status: HttpStatus,
         request: WebRequest
-    ): ResponseEntity<Any>? {
+    ): ResponseEntity<Any> {
         return ResponseEntity(ApiResponse(status.value(),ex.message!!,null),status)
     }
 
@@ -53,4 +56,6 @@ class ControllerExceptionHandler :ResponseEntityExceptionHandler() {
             return createHttpExceptions(HttpStatus.UNAUTHORIZED,message)
         }
     }
+    class RestAuthenticationException(message: String?) : AuthenticationException(message)
 }
+

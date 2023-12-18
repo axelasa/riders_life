@@ -4,7 +4,7 @@ import com.trnk.thika_road_nyumba_kumi.dto.UserDto
 import com.trnk.thika_road_nyumba_kumi.globalService.GlobalServices.Companion.userService
 import com.trnk.thika_road_nyumba_kumi.model.ApiResponse
 import com.trnk.thika_road_nyumba_kumi.model.UserModel
-import jakarta.validation.Valid
+import javax.validation.Valid
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
 import org.springframework.http.HttpStatus

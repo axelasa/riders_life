@@ -1,6 +1,6 @@
 package com.trnk.thika_road_nyumba_kumi.model
 
-import jakarta.validation.constraints.NotEmpty
+import javax.validation.constraints.NotEmpty
 
  class LoginModel (
     @field:NotEmpty(message = "username is required") val username:String,

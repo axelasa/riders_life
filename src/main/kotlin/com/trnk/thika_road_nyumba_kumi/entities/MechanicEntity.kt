@@ -1,7 +1,7 @@
 package com.trnk.thika_road_nyumba_kumi.entities
 
 import com.trnk.thika_road_nyumba_kumi.model.MechanicModel
-import jakarta.persistence.*
+import javax.persistence.*
 import java.util.Date
 
 @Entity

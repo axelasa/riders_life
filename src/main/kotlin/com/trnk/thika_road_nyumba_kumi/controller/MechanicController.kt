@@ -5,12 +5,11 @@ import com.trnk.thika_road_nyumba_kumi.globalService.GlobalServices.Companion.me
 import com.trnk.thika_road_nyumba_kumi.model.ApiResponse
 import com.trnk.thika_road_nyumba_kumi.model.MechanicModel
 import com.trnk.thika_road_nyumba_kumi.model.UpdateMechanic
-import jakarta.validation.Valid
 import org.springframework.data.domain.PageRequest
-import org.springframework.data.domain.Sort
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import javax.validation.Valid
 
 @RestController
 @RequestMapping("/mechanic")

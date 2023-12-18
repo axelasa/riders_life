@@ -1,8 +1,12 @@
 package com.trnk.thika_road_nyumba_kumi.entities
 
 import com.trnk.thika_road_nyumba_kumi.model.UserModel
-import jakarta.persistence.*
-import java.util.Date
+import javax.persistence.*
+import org.springframework.security.core.GrantedAuthority
+import org.springframework.security.core.authority.SimpleGrantedAuthority
+import org.springframework.security.core.userdetails.UserDetails
+import java.util.*
+
 
 @Entity
 @Table(name = "user_data")
@@ -11,24 +15,53 @@ import java.util.Date
     @GeneratedValue(strategy = GenerationType.AUTO)
     val id:Long?,
     val createdAt:Date,
-    val firstname:String,
-    val lastname:String,
+    var firstname:String,
+    var lastname:String,
     val idNumber:String,
-    val password:String,
+    var userPassword:String,
+    @ManyToOne(fetch = FetchType.EAGER)
+    val role: UserRolesEntity,
     @JoinColumn(name = "profile_id")
     @OneToOne(fetch = FetchType.EAGER, cascade = [CascadeType.ALL], orphanRemoval = true)
     var profile:ProfileEntity?,
     @OneToMany(mappedBy = "user",fetch = FetchType.EAGER, cascade = [CascadeType.ALL], orphanRemoval = true )
     val emergencyContact:MutableSet<EmergencyContactEntity> = mutableSetOf(),
-    val updatedAt:Date,
+    var updatedAt:Date,
 
-
-){
+    ):UserDetails{
     companion object{
         private val now = Date()
-        fun createNewUser(user: UserModel):UserEntity{
-            val newUser = UserEntity(null, createdAt = now, firstname = user.firstname, lastname = user.lastname, idNumber = user.idNumber, password = user.password, updatedAt = now, emergencyContact = mutableSetOf(),profile = null,)
+        fun createNewUser(user: UserModel,role: UserRolesEntity):UserEntity{
+            val newUser = UserEntity(null, createdAt = now, firstname = user.firstname, lastname = user.lastname, idNumber = user.idNumber, userPassword = user.userPassword, updatedAt = now, emergencyContact = mutableSetOf(), role = role , profile = null,)
             return newUser
         }
+    }
+
+    override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
+        return mutableSetOf(SimpleGrantedAuthority(role.name))
+    }
+
+    override fun getPassword(): String {
+        return userPassword
+    }
+
+    override fun getUsername(): String {
+        return idNumber
+    }
+
+    override fun isAccountNonExpired(): Boolean {
+        return true
+    }
+
+    override fun isAccountNonLocked(): Boolean {
+        return true
+    }
+
+    override fun isCredentialsNonExpired(): Boolean {
+        return true
+    }
+
+    override fun isEnabled(): Boolean {
+        return true
     }
 }

@@ -1,8 +1,8 @@
 package com.trnk.thika_road_nyumba_kumi.model
 
-import jakarta.persistence.Column
-import jakarta.validation.constraints.NotEmpty
-import java.util.*
+
+import javax.validation.constraints.NotEmpty
+
 
  class ProfileModel(
     @field:NotEmpty(message = "bloodGroup is required") val bloodGroup: String,

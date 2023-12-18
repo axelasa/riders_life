@@ -5,7 +5,7 @@ import com.trnk.thika_road_nyumba_kumi.globalService.GlobalServices.Companion.em
 import com.trnk.thika_road_nyumba_kumi.model.ApiResponse
 import com.trnk.thika_road_nyumba_kumi.model.EmergencyContactModel
 import com.trnk.thika_road_nyumba_kumi.model.EmergencyContactUpdate
-import jakarta.validation.Valid
+import javax.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping

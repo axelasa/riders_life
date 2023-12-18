@@ -18,7 +18,7 @@ class LoginController {
     fun logInUser(@RequestBody loginModel: LoginModel):ResponseEntity<Any>{
         val user = loginService.loginUser(loginModel.username,loginModel.password)
         val response = ApiResponse(HttpStatus.CONFLICT.value()," Username and Password is Required",null)
-        if (user.idNumber.isEmpty() || user.password.isEmpty()){
+        if (user.idNumber.isEmpty() || user.userPassword.isEmpty()){
             return ResponseEntity(response,HttpStatus.CONFLICT)
         }
         val result = ApiResponse(HttpStatus.OK.value(),"Login Successful",UserDto.fromUserEntity(user))
